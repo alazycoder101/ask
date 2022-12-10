@@ -7,8 +7,11 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-password = ENV.fetch('TEST_PASSWORD', 'Test_1234')
 if Rails.env.development?
+  password = ENV.fetch('TEST_PASSWORD', 'Test_1234')
   User.create!(email: 'user@ask.com', login: 'user1', name: 'John', password: password,
                password_confirmation: password)
+  admin_password = ENV.fetch('ADMIN_PASSWORD', 'p@ssw0rd')
+  AdminUser.create!(email: 'admin@ask.com', password: admin_password, password_confirmation: admin_password)
 end
+
