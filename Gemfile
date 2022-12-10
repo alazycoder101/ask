@@ -40,6 +40,8 @@ gem 'activeadmin', '~> 2.13'
 # Use Sass to process CSS
 gem "sassc-rails"
 
+gem "pg_search"
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -71,6 +73,7 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'factory_bot_rails'
   gem 'capybara'
   gem 'capybara-selenium'
