@@ -11,6 +11,9 @@ class User < ApplicationRecord
       tsearch: { prefix: true }
     }
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   has_many :questions
   has_many :answers
 end
