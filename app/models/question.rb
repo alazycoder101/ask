@@ -1,6 +1,8 @@
 class Question < ApplicationRecord
   include PgSearch::Model
 
+  acts_as_commentable
+
   pg_search_scope :global_search,
     against: [:title, :body],
     using: {

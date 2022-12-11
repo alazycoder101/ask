@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/alazycoder101/acts_as_commentable.git
+  revision: cdbdf445b2bf8b8ad94e88e49f41134e58042ba2
+  specs:
+    acts_as_commentable (6.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -347,6 +353,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin (~> 2.13)
+  acts_as_commentable!
   awesome_print
   bootsnap
   capybara

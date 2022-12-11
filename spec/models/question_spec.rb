@@ -11,4 +11,13 @@ RSpec.describe Question, type: :model do
       expect(question.topics.count).to eq(1)
     end
   end
+
+  describe 'commentable' do
+    let(:question) { create(:question) }
+
+    it 'has comments' do
+      question.comments.create(title: 'first')
+      expect(question.comments.size).to eq(1)
+    end
+  end
 end
