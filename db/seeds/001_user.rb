@@ -17,5 +17,8 @@ if Rails.env.development?
                password_confirmation: password)
   User.create!(email: 'user4@ask.com', login: 'user4', name: 'Kate', password: password,
                password_confirmation: password)
+
+  admin_password = ENV.fetch('ADMIN_PASSWORD', 'p@ssw0rd')
+  AdminUser.create!(email: 'admin@ask.com', password: admin_password, password_confirmation: admin_password)
 end
 
