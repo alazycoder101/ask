@@ -4,7 +4,7 @@
 <%= form_for(item, html: {'data-turbo': false}) do |f| %>
   <div class="field">
     <%= f.label :title %><br />
-    <%= f.text_field :title, palceholder: "Question title", autofocus: true %>
+    <%= f.text_field :title, required: true, palceholder: "Question title", autofocus: true %>
   </div>
 
   <div class="field">
@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= f.label :content %><br />
-    <%= f.text_area :body, rows: 10, cols: 10, placeholder: "Leave details...", autocomplete: "current-password" %>
+    <%= f.text_area :body, requried: true, rows: 10, cols: 10, placeholder: "Leave details...", autocomplete: "current-password" %>
   </div>
 
   <div class="actions">
