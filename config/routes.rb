@@ -27,4 +27,6 @@ Rails.application.routes.draw do
       get "update_topic"
     end
   end
+
+  resources :search, only: [:index]
 end

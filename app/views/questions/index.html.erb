@@ -1,8 +1,12 @@
 <div class="grid grid-cols-2 gap-4">
 
 <div id="questions">
-  <% @questions.each do |item| %>
-    <%= render "questions/question", :item => item %>
+  <% if @questions.count == 0 %>
+    <span>No results</span>
+  <% else %>
+    <% @questions.each do |item| %>
+      <%= render "questions/question", :item => item %>
+    <% end %>
   <% end %>
 </div>
 <%= paginate @questions %>

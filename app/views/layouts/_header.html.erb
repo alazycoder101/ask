@@ -2,13 +2,20 @@
   <a href="/"><h1 class="site_title" id="site_title">Ask</h1></a>
   <ul class="header-item tabs" id="tabs">
     <% if current_user %>
-    <li class="menu_item current" id="dashboard"><a href="/home">Dashboard</a></li>
-    <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
-    <li class="menu_item" id="answers"><a href="/answers">Answers</a></li>
-    <li class="menu_item" id="comments"><a href="/comments">Comments</a></li>
+      <li class="menu_item current" id="dashboard"><a href="/home">Dashboard</a></li>
+      <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
+      <li class="menu_item" id="answers"><a href="/answers">Answers</a></li>
+      <li class="menu_item" id="comments"><a href="/comments">Comments</a></li>
+    <% else %>
+      <li class="menu_item" id="topics"><a href="/topics">Topics</a></li>
+      <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
     <% end %>
-    <li class="menu_item" id="topics"><a href="/topics">Topics</a></li>
-    <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
+  </ul>
+  <ul class="header-item tabs" id="utility_nav">
+    <form action="/search">
+    <input type="search" calss="p=3 w-fit" placeholder="search question here..." id="site-search" name="q">
+    <button type=submit>Search</button>
+    </form>
   </ul>
   <ul class="header-item tabs" id="utility_nav">
     <% if current_user %>
