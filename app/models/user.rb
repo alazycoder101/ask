@@ -12,6 +12,7 @@ class User < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
+  multisearchable against: [:name, :email]
 
   extend FriendlyId
   friendly_id :name, use: :slugged

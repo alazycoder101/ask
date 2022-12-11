@@ -10,7 +10,7 @@
 
 4. Questions can be tagged and categorized.
 
-5. User can get suggestions for existing questions.
+5. User can get suggestions for existing questions. (not yet)
 
 6. User can be rewarded with more upvote.
 
@@ -38,15 +38,20 @@
 * Authorization: pundit
 * slug: FriendlyId
 * Admin: ActiveAdmin
-* Comment: Commentable
+* Comment: acts_as_commentable https://github.com/alazycoder101/acts_as_commentable
 * Vote: Votable
 * pagination: kaminari
-
+* Tailwind: styling
 
 ## Development
+### Gems
+* Rspec
+* Rubocop
+* Capybara
+
 ### Setup
 ```bash
-# 
+# Ruby
 brew install ruby
 brew install asdf
 
@@ -61,20 +66,15 @@ bundle install
 bin/rails db:create
 bin/rails db:migrate
 
+bin/rails db:seed
+
+# replant seed
+bin/rails db:seed:replant
+
 # run the server
 bin/dev 
 # goto http://0.0.0.0:3000
 ```
 
-### Gems
-* Rspec
-* Rubocop
-* Capybara
-* Tailwind
-
 Please go here to check more details
 Rails project with tailwind: https://github.com/alazycoder101/rails-tailwind
-
-
-
-

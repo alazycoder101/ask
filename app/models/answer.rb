@@ -9,6 +9,8 @@ class Answer < ApplicationRecord
       tsearch: { prefix: true }
     }
 
+  multisearchable against: [:body]
+
   belongs_to :user
   belongs_to :question
 end

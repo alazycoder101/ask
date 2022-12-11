@@ -1,0 +1,25 @@
+<div class="grid grid-rows-2 gap-4">
+  <div class="grid grid-cols-2 gap-4">
+
+    <div id="questions">
+      <% if @items.count == 0 %>
+        <span>No results</span>
+      <% else %>
+        <% @items.each do |item| %>
+          <% if item.searchable_type == 'Question' %>
+            <%= render "questions/question", :item => item %>
+          <% elsif item.searchable_type == 'User' %>
+            <%= render "users/user", :item => item %>
+          <% else %>
+            <%= render "answers/answer", :item => item %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+    </div>
+  </div>
+  <div>
+    <%= paginate @items %>
+  </div>
+</div>
