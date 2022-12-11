@@ -1,0 +1,23 @@
+<div class="header" id="header">
+  <a href="/"><h1 class="site_title" id="site_title">Ask</h1></a>
+  <ul class="header-item tabs" id="tabs">
+    <% if current_user %>
+    <li class="menu_item current" id="dashboard"><a href="/home">Dashboard</a></li>
+    <li class="menu_item" id="admin_users"><a href="/questions">Questions</a></li>
+    <li class="menu_item" id="answers"><a href="/answers">Answers</a></li>
+    <li class="menu_item" id="comments"><a href="/comments">Comments</a></li>
+    <% end %>
+    <li class="menu_item" id="admin_users"><a href="/topics">Topics</a></li>
+    <li class="menu_item" id="questions"><a href="/answers">Questions</a></li>
+  </ul>
+  <ul class="header-item tabs" id="utility_nav">
+    <% if current_user %>
+    <li class="menu_item" id="ask"><a href="/questions/new">Ask</a></li>
+    <li class="menu_item" id="current_user"><a href="/users/2"><%= current_user.email%></a></li>
+    <li class="menu_item" id="logout"><a data-method="delete" href="/logout">Logout</a></li>
+    <% else %>
+    <li class="menu_item" id="logout"><a data-method="delete" href="/login">Sign In</a></li>
+    <% end %>
+  </ul>
+  </div>
+<div>
