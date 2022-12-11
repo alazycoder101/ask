@@ -56,6 +56,8 @@ gem "pg_search"
 gem 'friendly_id', '~> 5.4.0'
 gem 'acts_as_commentable', git: 'https://github.com/alazycoder101/acts_as_commentable.git'
 gem 'acts_as_votable'
+# Authorization
+gem "pundit", "~> 2.2"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
@@ -94,4 +96,5 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
 

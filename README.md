@@ -33,11 +33,13 @@
 ### Backend
 * Rails
 
-## Authentication
-devise
-
-## admin
-ActiveAdmin
+## Functions
+* Authentication: devise
+* Authorization: pundit
+* slug: FriendlyId
+* Admin: ActiveAdmin
+* Comment: Commentable
+* Vote: Votable
 
 
 ## Development
