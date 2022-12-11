@@ -3,4 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  include PgSearch::Model
+  pg_search_scope :global_search,
+    against: [:name, :email],
+    using: {
+      tsearch: { prefix: true }
+    }
+
+  has_many :questions
+  has_many :answers
 end
