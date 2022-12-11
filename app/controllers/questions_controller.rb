@@ -27,10 +27,12 @@ class QuestionsController < ApplicationController
     @question.user_id = current_user.id
 
     respond_to do |format|
-      if @ask.save
+      if @question.save
         format.html { redirect_to(question_path(@question.id), :notice => 'Question is created.') }
         format.json
       else
+        debugger
+        flash.alert = @question.errors.full_messages.join('. ')
         format.html { render :action => "new" }
         format.json
       end

@@ -1,27 +1,5 @@
-<% content_for :scripts do %>
-  <script type="text/javascript">
-    var question_id = '<%= @question.id %>';
-  </script>
-<% end %>
-
 <%= render 'base' %>
-<% if not @rf_ask.blank? %>
-  <script type="text/javascript">
-    Asks.redirected_tip('<%= @rf_ask.title %>', '<%= @rf_ask.id %>','rf');
-  </script>
-<% end %>
-<% if not @r_ask.blank? %>
-  <script type="text/javascript">
-    Asks.redirected_tip('<%= @r_ask.title %>', '<%= @r_ask.id %>','nr', '<%= @ask.id %>');
-  </script>
-<% end %>
-<% if can_edit?(@question) %>
-  <% if !@suggest_topics.blank? %>
-    <script type="text/javascript">
-      Questions.showSuggestTopics(<%=raw @suggest_topics.to_json %>);
-    </script>
-  <% end %>
-<% end %>
+<% can_edit =  policy(@question).update? %>
 <div class="question" id="question<%= @question.id %>">
   <div class="topics">
     <div class="item_list">
@@ -29,11 +7,11 @@
         <%= topics_name_tag(@question.topics) %>
       <% else %>
         <% if current_user %>
-          <span class="no_result">给这个问题选个话题吧，好让别人来回答</span>
+          <span class="no_result">Please add a topics for others to find</span>
         <% end %>
       <% end %>
-      <% if can_edit?(@question) %>
-        <a href="#" onclick="return Questionss.toggleEditTopics(true);" class="in_place_edit">修改</a>
+      <% if can_edit %>
+        <a href="#" onclick="return Questionss.toggleEditTopics(true);" class="in_place_edit">edit</a>
       <% end %>
     </div>
     <div class="edit_topics" style="display:none">
@@ -48,23 +26,21 @@
         <% end %>
       </div>
       <form data-remote="true" action="<%= question_path(@question.id) %>/update_topic" onsubmit="return Questions.beforeAddTopic(this);" method="post">
-        <input type="text" class="name" id="searchTopic" style="width:100px;" name="name" value="" placeholder="搜索话题" /> 
+        <input type="text" class="name" id="searchTopic" style="width:100px;" name="name" value="" placeholder="search..." /> 
         <input type="hidden" name="add" value="1" /> 
-        <button type="submit" class="small">添加</button> 
-        <a href="#" onclick="return Asks.toggleEditTopics(false);">完成</a>
+        <button type="submit" class="small">Submit</button> 
       </form>
-      <script type="text/javascript">Asks.completeTopic($("#searchTopic"));</script>
     </div>
   </div>
   <div class="title">
     <h1><%= "#{@question.user.name}：" if !@question.user.blank? %><span id="ask_title"><%= @question.title %></span></h1>
-    <% if can_edit?(@question) %>
+    <% if can_edit %>
       <%= in_place_edit_tag @question, :title, :type => :textarea, :width => 598, :height => 40, :rich => false, :text_id => "ask_title" %>
     <% end %>
   </div>
   <div class="md_body">
     <div id="ask_body"<% if @question.body.blank? %> class="blank-body"<% end %>><%= @question.body %></div>
-    <% if can_edit?(@question) %>
+    <% if can_edit %>
       <% if @question.body.blank? %>
         <%= in_place_edit_tag @question, :body, :type => :textarea, :text_id => "ask_body",:label => "添加补充资料" %>
       <% else %>
@@ -74,16 +50,16 @@
   </div>
   <div class="action">
     <% if @question.comments_count == 0 %>
-      <a href="#" onclick="return Asks.toggleComments('ask','<%= @question.id %>');">添加评论</a>
+      <a href="#" onclick="return Asks.toggleComments('ask','<%= @question.id %>');">comment</a>
     <% else %>
-      <a href="#" onclick="return Asks.toggleComments('ask','<%= @question.id %>');"><%= @question.comments_count %> 条评论</a>
+      <a href="#" onclick="return Asks.toggleComments('ask','<%= @question.id %>');"><%= @question.comments_count %> comments</a>
     <% end %>
-    • <a href="#new_answer" onclick="return $('#new_answer .qeditor_preview').focus();">添加答案</a>
+    • <a href="#new_answer" onclick="return $('#new_answer .qeditor_preview').focus();">answer</a>
     • <span class="date"><%= l @question.created_at.getlocal, :format => :short %></span>
   </div>
 </div>
 
-<% if @question.answers_count > 0 %>
+<% if @question.answers_count.to_i > 0 %>
 <div class="answers-count">
 	<%= @ask.answers_count %> answers
 </div>
@@ -101,15 +77,13 @@
 
 <% if current_user %>
   <% if user_answered %>
-    <div class="disabled_answer">一个问题你只能回答一次，但你可以对现有的回答进行修改。</div>
-  <% elsif !@question.user.blank? and current_user.id != @question.user_id %>
-    <div class="disabled_answer">这个问题是对 <%= user_name_tag(@question.to_user) %> 提问的，只有<%= user_sex_title(@question.to_user) %>才能回答。</div>
+    <div class="disabled_answer">You can only answer onece，but you can change your answer。</div>
   <% else %>
     <div class="answer_form from">
-      <h2>添加答案</h2>
+      <h2>Answer</h2>
       <% if current_user %>
       <div class="user_info">
-        <%= user_name_tag(current_user) %>,
+        <%= current_user.name %>,
         <span id="answer_user_tagline"><%= user_tagline_tag(current_user) %></span>
         <%= in_place_edit_tag current_user, :tagline, :text_id => "answer_user_tagline", :label => "修改简介" %>
       </div>
@@ -120,7 +94,7 @@
           <%= f.text_area :body, :style => "height:100px;", :class => "text long" %>
         </div>
         <div class="actions">
-          <button class="submit" type="submit">提交回答</button>
+          <button class="submit" type="submit">Answer</button>
         </div>
       <% end %>
       <script type="text/javascript">
@@ -138,42 +112,13 @@
       </div>
     <% end %>
 
-    <div style="display:none" id="redirect_ask">
-      <div id="redirect_ask_panel" class="facebox_window simple_form">
-        <h2>指向另外个已经存在的问题</h2>
-        <form action="" onsubmit="return Asks.redirect_ask_save(this);">
-          <div class="field">
-            <label>把问题“<%= @question.title %>”指向:</label>
-            <input type="text" class="search" style="width:450px;" placeholder="搜索标题" />
-            <input type="hidden" class="r_title" />
-            <input type="hidden" class="r_id" />
-          </div>
-          <div class="actions">
-            <button type="submit">确定重定向</button>
-            <a style="margin-left:10px;" onclick="$.facebox.close(); return false;" href="#">取消</a>
-          </div>
-        </form>
-      </div>
+    <div class="box standard gray">
+      <h2>stats</h2>
+        <div class="inner">
+            <p>views <%= @question.views_count %> views</p>
+            <% if @question.user %>
+            <p>asked by <%= @question.user.name %></p>
+            <% end %>
+        </div>
     </div>
-
-
-
-		<div class="box standard gray">
-			<h2>问题状态</h2>
-			<div class="inner">
-				<p>views <%= @question.views_count %> 次</p>
-				<% if @question.user %>
-				<p><%= user_name_tag(@question.user) %> 创建了该问题</p>
-				<% end %>
-			</div>
-    </div>
-<% end %>
-<% if params[:eawc] == "yes" or params[:easc] == "yes" %>
-	<% content_for :scripts do %>
-	  <script type="text/javascript">
-			$(document).ready(function() {
-				Asks.toggleComments('<%= params[:eawc] == "yes" ? "answer" : "ask" %>','<%= params[:eawc] == "yes" ? params[:awid] : params[:asid] %>');
-			});
-		</script>
-	<% end %>
 <% end %>
