@@ -23,11 +23,16 @@
 2. omniauth
 3. Soft delete
 4. Audit logs
+5. Spam check
+6. Mute
+7. Share question to social media
+8. Notification and Emails
+9. Specify user to answer questions
 
 ## Tech Options
 ### Database
-* PostgreSQL
-* MongoDB
+* PostgreSQL: very popular RDBMS
+* MongoDB: easy to expand and change and distributed support, but not good for join operations
 
 ### Front End
 * React
@@ -37,15 +42,15 @@
 * Rails
 
 ## Functions
-* Authentication: devise
-* Authorization: pundit
+* Authentication: [devise](https://github.com/heartcombo/devise)
+* Authorization: [pundit](https://github.com/varvet/pundit)
 * slug: FriendlyId
 * Admin: ActiveAdmin
-* Comment: acts_as_commentable https://github.com/alazycoder101/acts_as_commentable
-* Vote: Votable
-* pagination: kaminari
+* Comment: [acts_as_commentable](https://github.com/alazycoder101/acts_as_commentable)
+* Vote: [Acts As Votable](https://github.com/ryanto/acts_as_votableVotable)
+* pagination: [kaminari](https://github.com/kaminari/kaminari)
 * Tailwind: styling
-* pg_search: global text search
+* [pg_search](https://github.com/Casecommons/pg_search): global text search
 
 ## Development
 ### Gems
