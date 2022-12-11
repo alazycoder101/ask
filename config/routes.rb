@@ -16,4 +16,15 @@ Rails.application.routes.draw do
                registration: 'register',
                sign_up: 'signup'
              }
+
+  resources :topics do end
+  resources :users do end
+
+  resources :questions do
+    member do
+      post "answer"
+      post "update_topic"
+      get "update_topic"
+    end
+  end
 end

@@ -1,0 +1,25 @@
+<div class="rounded overflow-hidden shadow-lg">
+  <div class="user">
+  <%= image_tag avatar_url_for(item.user), class: "rounded-full h-8 w-8 align-middle" %>
+  <a href="<%=user_path(item.user)%>"><%=item.user.name%></a>
+  </div>
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2"><%= item.title %></div>
+    <p class="text-gray-700 text-base">
+      <%= item.body %>
+    </p>
+  </div>
+  <div class="px-6 pt-4 pb-2">
+    <% item.topics.each do |topic| %>
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><a href="<%= topic_path(topic) %>"><%= topic.name %></a></span>
+    <% end %>
+  </div>
+  <div class="px-6 pt-4 pb-2">
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.views_count  %>views</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.answers_count  %>answers</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.comments_count  %>comments</span>
+  </div>
+  <div class="action">
+    <%= link_to('answser', answer_question_path(item)) %>
+  </div
+</div>
