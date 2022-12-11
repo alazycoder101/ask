@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit]
 
   def index
-    @questions = Question.all
+    @questions = Question.order(id: :desc).page params[:page]
   end
 
   def new
@@ -35,6 +35,9 @@ class QuestionsController < ApplicationController
         format.json
       end
     end
+  end
+
+  def anwser
   end
 
   private

@@ -40,6 +40,7 @@
 * Admin: ActiveAdmin
 * Comment: Commentable
 * Vote: Votable
+* pagination: kaminari
 
 
 ## Development

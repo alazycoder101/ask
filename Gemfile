@@ -98,3 +98,5 @@ group :development do
 end
 
 
+
+gem "kaminari", "~> 1.2"

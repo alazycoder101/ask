@@ -376,6 +376,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  kaminari (~> 1.2)
   pg (~> 1.1)
   pg_search
   puma (~> 5.0)
