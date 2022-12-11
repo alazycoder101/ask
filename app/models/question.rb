@@ -11,7 +11,11 @@ class Question < ApplicationRecord
 
   multisearchable against: [:title, :body]
 
+  scope :followed_by, lambda {|user| liked_by(user, vote_scope: User::FOLLOW) }
+
   belongs_to :user
+
+  acts_as_votable
 
   has_many :question_topics
   has_many :topics, through: :question_topics
