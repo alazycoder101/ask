@@ -17,12 +17,25 @@ Rails.application.routes.draw do
                sign_up: 'signup'
              }
 
-  resources :topics do end
-  resources :users do end
+  resources :topics do
+    member do
+      post "follow"
+      post "unfollow"
+    end
+  end
+
+  resources :users do
+    member do
+      post "follow"
+      post "unfollow"
+    end
+  end
 
   resources :questions do
     member do
       post "answer"
+      post "follow"
+      post "unfollow"
       post "update_topic"
       get "update_topic"
     end

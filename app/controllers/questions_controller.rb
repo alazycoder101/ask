@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
 
-  before_action :set_question, only: [:show, :edit]
+  before_action :set_question, only: [:show, :edit, :follow]
 
   def index
     @questions = Question.order(id: :desc).page params[:page]
@@ -14,6 +14,14 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+  end
+
+  def follow
+    current_user.follow(@question)
+  end
+
+  def unfollow
+    current_user.unfollow(@question)
   end
 
   def create

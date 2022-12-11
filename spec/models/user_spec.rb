@@ -28,49 +28,66 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#followed_users' do
+  describe '#following_users' do
     let(:user) { create(:user) }
     let(:user1) { create(:user) }
 
     it 'does not follow' do
-      expect(user.followed_users.count).to eq(0)
+      expect(user.following_users.count).to eq(0)
     end
 
     it 'does follow' do
       user.follow(user1)
 
-      expect(user.followed_users.count).to eq(1)
+      expect(user.following_users.count).to eq(1)
     end
   end
 
-  describe '#followed_topics' do
+  describe '#following_topics' do
     let(:user) { create(:user) }
     let(:topic) { create(:topic) }
 
     it 'does not follow' do
-      expect(user.followed_topics.count).to eq(0)
+      expect(user.following_topics.count).to eq(0)
     end
 
     it 'does follow' do
       user.follow(topic)
 
-      debugger
-      expect(user.followed_topics.count).to eq(1)
+      expect(user.following_topics.count).to eq(1)
     end
   end
 
-  describe '#followed_questions' do
+  describe '#following_questions' do
     let(:user) { create(:user) }
     let(:question) { create(:question) }
 
     it 'does not follow' do
-      expect(user.followed_questions.count).to eq(0)
+      expect(user.following_questions.count).to eq(0)
     end
 
     it 'does follow' do
       user.follow(question)
 
-      expect(user.followed_questions.count).to eq(1)
+      expect(user.following_questions.count).to eq(1)
     end
   end
+
+  describe '#unfollow' do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+
+    before do
+      expect(user1.follow?(user2)).to be_falsy
+      user1.follow(user2)
+      expect(user1.follow?(user2)).to be_truthy
+    end
+
+    it 'does unfollow' do
+      user1.unfollow(user2)
+
+      expect(user1.follow?(user2)).to be_falsy
+    end
+  end
+
 end

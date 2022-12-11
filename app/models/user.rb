@@ -27,22 +27,26 @@ class User < ApplicationRecord
   has_many :comments
 
   def follow(item)
-    self.likes item, vote_scope: FOLLOW
+    self.likes item, vote_scope: FOLLOW, duplicate: false
+  end
+
+  def unfollow(item)
+    self.dislikes item, vote_scope: FOLLOW, duplicate: false
   end
 
   def follow?(item)
-    voted_for? item, vote_scope: FOLLOW
+    voted_up_on? item, vote_scope: FOLLOW
   end
 
-  def followed_users
+  def following_users
     votes.up.where(vote_scope: FOLLOW, votable_type: :User)
   end
 
-  def followed_topics
+  def following_topics
     votes.up.where(vote_scope: FOLLOW, votable_type: :Topic)
   end
 
-  def followed_questions
+  def following_questions
     votes.up.where(vote_scope: FOLLOW, votable_type: :Question)
   end
 end
