@@ -1,13 +1,13 @@
-<div class="grid grid-cols-2 gap-4">
-
-<div id="topics">
-  <% @topics.each do |item| %>
-    <%= render "topics/topic", :item => item %>
-  <% end %>
-  <% if @topics.length == @per_page %>
-    <div class="pagination"><a class="page_more" href="#" onclick="return loadAsks();">more...</a></div>
-  <% end %>
-</div>
-<div>
-</div>
+<div class="grid grid-rows-2 gap-4">
+  <div class="grid grid-cols-2 gap-4">
+    <div id="topics">
+      <% @topics.each do |item| %>
+        <%= render "topics/topic", :item => item %>
+      <% end %>
+    </div>
+    <div>
+    </div>
+  <div>
+    <%= paginate @topics %>
+  </div>
 </div>
