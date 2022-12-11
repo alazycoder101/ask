@@ -3,15 +3,10 @@
 <div class="question" id="question<%= @question.id %>">
   <div class="topics">
     <div class="item_list">
-      <% if !@question.topics.blank? %>
-        <%= topics_name_tag(@question.topics) %>
-      <% else %>
+      <% if @question.topics.blank? %>
         <% if current_user %>
           <span class="no_result">Please add a topics for others to find</span>
         <% end %>
-      <% end %>
-      <% if can_edit %>
-        <a href="#" onclick="return Questionss.toggleEditTopics(true);" class="in_place_edit">edit</a>
       <% end %>
     </div>
     <div class="edit_topics" style="display:none">
@@ -59,9 +54,9 @@
   </div>
 </div>
 
-<% if @question.answers_count.to_i > 0 %>
+<% if @question.answers.count.to_i > 0 %>
 <div class="answers-count">
-	<%= @ask.answers_count %> answers
+	<%= @question.answers_count %> answers
 </div>
 <% end %>
 
