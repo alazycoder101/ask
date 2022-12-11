@@ -19,7 +19,9 @@
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.answers_count  %>answers</span>
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.comments_count  %>comments</span>
   </div>
-  <div class="action">
-    <%= link_to('answser', question_path(item)) %>
-  </div
+  <% if current_user %>
+    <div class="action">
+      <%= link_to('answser', question_path(item)) %>
+    </div
+  <% end %>
 </div>
