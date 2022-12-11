@@ -22,6 +22,8 @@
   <% if current_user %>
     <div class="action">
       <%= link_to('answser', question_path(item)) %>
+      <%= link_to('upvote', upvote_question_path(item)) %>
+      <%= link_to('downvote', downvote_question_path(item)) %>
     </div
   <% end %>
 </div>

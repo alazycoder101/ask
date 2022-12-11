@@ -1,4 +1,21 @@
-<div>
-  <h1 class="font-bold text-4xl">Home#index</h1>
-  <p>Find me in app/views/home/index.html.erb</p>
+<div class="grid grid-cols-3 gap-4">
+  <div id="users" class="cols-1" style="width:30%">
+    <% @users.each do |item| %>
+      <%= render "users/user", :item => item %>
+    <% end %>
+  </div>
+  <div id="questions" style="width:30%">
+    <% if @questions.count == 0 %>
+      <span>No results</span>
+    <% else %>
+      <% @questions.each do |item| %>
+        <%= render "questions/question", :item => item %>
+      <% end %>
+    <% end %>
+  </div>
+  <div id="topics">
+    <% @topics.each do |item| %>
+      <%= render "topics/topic", :item => item %>
+    <% end %>
+  </div>
 </div>
