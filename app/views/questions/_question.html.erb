@@ -19,13 +19,32 @@
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.answers_count  %> answers</span>
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.comments_count  %> comments</span>
   </div>
+  <div class="px-6 pt-4 pb-2">
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.votes_for.up.count  %> up</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.votes_for.down.count  %> down</span>
+  </div>
+  </div>
   <% if current_user || true %>
     <div class="action">
       <%= link_to('answser', question_path(item)) %>
-      <div class="vote action">
-        <%= link_to('upvote', upvote_question_path(item)) %>
-        <%= link_to('downvote', downvote_question_path(item)) %>
+      <div class="vote action" data-controller="vote">
+        <%= link_to('upvote', upvote_question_path(item), method: :post, remote: true, action: 'click->vote#upvote' ) %>
+        <%= link_to('downvote', downvote_question_path(item), method: :post, remote: true, action: 'click->vote#downvote' ) %>
       </div>
-    </div
+    </div>
+    <div id="options" data-controller="visibility">
+      <button data-action="visibility#toggleTargets">answer</button>
+
+      <div data-visibility-target="hideable" hidden>
+        <%= render "answers/form", :item => Answer.new(question_id: item.id) %>
+      </div>
+    </div>
+
+    <div id="options" data-controller="visibility">
+      <button data-action="visibility#toggleTargets">comment</button>
+      <div data-visibility-target="hideable" hidden>
+        <%= render "comments/form", :item => Comment.new(commentable_id: item.id, commentable_type: 'Question') %>
+      </div>
+    </div>
   <% end %>
 </div>

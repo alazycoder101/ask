@@ -31,6 +31,15 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :answers do
+    member do
+      post "upvote"
+      post "downvote"
+    end
+  end
+
+  resources :comments
+
   resources :questions do
     member do
       post "answer"

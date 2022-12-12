@@ -1,24 +1,14 @@
-<div id="question">
-<h2>Question</h2>
-
+<div id="comment">
 <%= form_for(item, html: {'data-turbo': false}) do |f| %>
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title, required: true, palceholder: "Question title", autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :topics %><br />
-    <%= f.select :topic_ids, options_for_topic, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :body, requried: true, rows: 10, cols: 10, placeholder: "Leave details...", autocomplete: "current-password" %>
+    <%= f.hidden_field :commentable_id %>
+    <%= f.hidden_field :commentable_type %>
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment, required: true, rows: 10, cols: 10, placeholder: "Leave your comment...", autocomplete: "off" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Ask" %>
+    <%= f.submit "Submit" %>
   </div>
 <% end %>
 </div>

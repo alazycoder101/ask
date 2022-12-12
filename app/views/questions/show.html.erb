@@ -5,8 +5,8 @@
   <% if @question.comments.count == 0 %>
     <span>No comments</span>
   <% else %>
-    <% @question.comments.each do |item| %>
-      <%= render "comments/comment", :item => item %>
+    <% @question.comments.each do |comment| %>
+      <%= render "comments/comment", :item => comment %>
     <% end %>
   <% end %>
 </div>
@@ -14,8 +14,8 @@
   <% if @question.answers.count == 0 %>
     <span>No answers</span>
   <% else %>
-    <% @question.answers.each do |item| %>
-      <%= render "answers/answer", :item => item %>
+    <% @question.answers.each do |answer| %>
+      <%= render "answers/answer", :item => answer %>
     <% end %>
   <% end %>
 </div>

@@ -1,5 +1,21 @@
 class AnswersController < ApplicationController
-  before_filter :require_user_text
+  before_action :authenticate_user!
+
+  def create
+    @answer = Answer.new(answer_params)
+    @answer.user_id = current_user.id
+
+    respond_to do |format|
+      if @answer.save
+        format.html { redirect_to(question_path(@answer.question_id), :notice => 'Answer is created.') }
+        format.json
+      else
+        flash.alert = @answer.errors.full_messages.join('. ')
+        format.html { render :action => "new" }
+        format.json
+      end
+    end
+  end
 
   def vote
     answer = Answer.find(params[:id])
@@ -14,5 +30,11 @@ class AnswersController < ApplicationController
   end
 
   def delete
+  end
+
+  private
+
+  def answer_params
+    params.require(:answer).permit(:body, :question_id)
   end
 end
