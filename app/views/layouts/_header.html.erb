@@ -19,9 +19,9 @@
   </ul>
   <ul class="header-item tabs" id="utility_nav">
     <% if current_user %>
-    <li class="menu_item" id="ask"><a href="/questions/new">Ask</a></li>
-    <li class="menu_item" id="current_user"><a href="/users/2"><%= current_user.email%></a></li>
-    <li class="menu_item" id="logout"><a data-method="delete" href="/logout">Logout</a></li>
+      <li class="menu_item" id="ask"><a href="/questions/new">Ask a question</a></li>
+      <li class="menu_item" id="current_user"><a href="/users/2"><%= current_user.email%></a></li>
+      <li class="menu_item" id="logout"><a data-method="delete" href="/logout">Logout</a></li>
     <% else %>
     <li class="menu_item" id="logout"><a data-method="delete" href="/login">Sign In</a></li>
     <% end %>

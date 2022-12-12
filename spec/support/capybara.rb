@@ -15,8 +15,10 @@ Capybara.register_driver :headless_chrome do |app|
     capabilities: options
   )
 end
-Capybara.default_driver = :headless_chrome
-Capybara.javascript_driver = :headless_chrome
+
+driver = ENV.fetch('DISABLE_HEADLESS', '') == '1' ? :chrome : :headless_chrome
+Capybara.default_driver = driver
+Capybara.javascript_driver = driver
 
 require 'capybara/rspec'
 
