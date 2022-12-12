@@ -13,4 +13,11 @@ class Answer < ApplicationRecord
 
   belongs_to :user
   belongs_to :question
+
+  after_create :update_question_aggregates
+  after_destroy :update_question_aggregates
+
+  def update_question_aggregates
+    question.update_aggregates
+  end
 end

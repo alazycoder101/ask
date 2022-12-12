@@ -12,4 +12,13 @@ class Comment < ActiveRecord::Base
 
   # NOTE: Comments belong to a user
   belongs_to :user
+
+  after_create :update_question_aggregates
+  after_destroy :update_question_aggregates
+
+  def update_question_aggregates
+    if commentable.respond_to?(:update_aggregates)
+      commentable.update_aggregates
+    end
+  end
 end

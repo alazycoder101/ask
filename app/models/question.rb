@@ -22,6 +22,15 @@ class Question < ApplicationRecord
   has_many :answers
 
   def view!
+    # let DB handle the racing conditions
     increment!(:views_count)
+  end
+
+  def update_aggregates
+    update_columns(
+      answers_count: answers.count,
+      comments_count: comments.count
+    )
+    reload
   end
 end
