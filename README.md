@@ -58,8 +58,23 @@
 * Rubocop
 * Capybara
 
+### Docker
 
-### Setup
+```bash
+# install docker
+brew install docker
+```
+(more...)[https://docs.docker.com/desktop/install/mac-install/]
+
+```bash
+cd docker
+docker compose build web
+docker compose run --rm web bin/rails db:create db:migrate db:seed
+docker compose up web
+# goto http://0.0.0.0:8081
+```
+
+### Setup on Mac
 ```bash
 # Ruby
 brew install ruby
