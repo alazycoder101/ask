@@ -20,4 +20,8 @@ class Question < ApplicationRecord
   has_many :question_topics
   has_many :topics, through: :question_topics
   has_many :answers
+
+  def view!
+    increment!(:views_count)
+  end
 end

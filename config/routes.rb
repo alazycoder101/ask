@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   resources :questions do
     member do
       post "answer"
+      post "upvote"
+      post "downvote"
       post "follow"
       post "unfollow"
       post "update_topic"

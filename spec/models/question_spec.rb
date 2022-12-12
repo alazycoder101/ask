@@ -20,4 +20,17 @@ RSpec.describe Question, type: :model do
       expect(question.comments.size).to eq(1)
     end
   end
+
+  describe 'view!' do
+    let(:question) { create(:question) }
+
+    before do
+      expect(question.views_count).to eq(0)
+    end
+
+    it 'increase views_count' do
+      question.view!
+      expect(question.views_count).to eq(1)
+    end
+  end
 end

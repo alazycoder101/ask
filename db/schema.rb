@@ -127,9 +127,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_203823) do
     t.string "title"
     t.string "body"
     t.datetime "answered_at", precision: nil
-    t.integer "views_count"
-    t.integer "answers_count"
-    t.integer "comments_count"
+    t.integer "views_count", null: false, default: 0
+    t.integer "answers_count", null: false, default: 0
+    t.integer "comments_count", null: false, default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_questions_on_user_id"

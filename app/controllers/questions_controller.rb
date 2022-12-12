@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
 
-  before_action :set_question, only: [:show, :edit, :follow]
+  before_action :set_question, only: [:show, :delete, :edit, :follow, :unfollow, :upvote, :downvote]
 
   def index
     @questions = Question.order(id: :desc).page params[:page]
@@ -11,17 +12,39 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question.view!
   end
 
   def edit
   end
 
+  def destroy
+    @question.destroy
+    render plain: "OK"
+  end
+
+  def upvote
+    current_user.likes(@question)
+
+    render plain: "voted", status: :created
+  end
+
+  def downvote
+    current_user.dislikes(@question)
+
+    render plain: "voted", status: :created
+  end
+
   def follow
     current_user.follow(@question)
+
+    render plain: "followed", status: :created
   end
 
   def unfollow
     current_user.unfollow(@question)
+
+    render plain: "unfollowed", status: :created
   end
 
   def create
@@ -39,7 +62,6 @@ class QuestionsController < ApplicationController
         format.html { redirect_to(question_path(@question.id), :notice => 'Question is created.') }
         format.json
       else
-        debugger
         flash.alert = @question.errors.full_messages.join('. ')
         format.html { render :action => "new" }
         format.json

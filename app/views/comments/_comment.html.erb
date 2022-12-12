@@ -1,0 +1,16 @@
+<div class="rounded overflow-hidden shadow-lg">
+  <div class="px-6 py-4">
+    <p class="text-gray-700 text-base">
+      <%= item.body %>
+    </p>
+  </div>
+  <div class="user">
+  <%= image_tag avatar_url_for(item.user), class: "rounded-full h-8 w-8 align-middle" %>
+  <a href="<%=user_path(item.user)%>"><%=item.user.name%></a>
+  </div>
+  <% if current_user %>
+    <%= link_to "Delete", post_path(post), data: { 'turbo-method': "delete", 'delete-target': "link", action: "turbo:click->delete#captureClick turbo:before-fetch-request@window->delete#deleteAndHide" } %>
+    </p>
+  </div>
+  <% end %>
+</div>

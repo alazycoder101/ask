@@ -5,9 +5,9 @@ class CreateQuestions < ActiveRecord::Migration[7.0]
       t.string :title
       t.string :body
       t.timestamp :answered_at
-      t.integer :views_count
-      t.integer :answers_count
-      t.integer :comments_count
+      t.integer :views_count, null: false, default: 0
+      t.integer :answers_count, null: false, default: 0
+      t.integer :comments_count, null: false, default: 0
 
       t.timestamps
     end

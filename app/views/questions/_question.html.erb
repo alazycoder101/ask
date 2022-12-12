@@ -15,15 +15,17 @@
     <% end %>
   </div>
   <div class="px-6 pt-4 pb-2">
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.views_count  %>views</span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.answers_count  %>answers</span>
-    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.comments_count  %>comments</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.views_count  %> views</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.answers_count  %> answers</span>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.comments_count  %> comments</span>
   </div>
-  <% if current_user %>
+  <% if current_user || true %>
     <div class="action">
       <%= link_to('answser', question_path(item)) %>
-      <%= link_to('upvote', upvote_question_path(item)) %>
-      <%= link_to('downvote', downvote_question_path(item)) %>
+      <div class="vote action">
+        <%= link_to('upvote', upvote_question_path(item)) %>
+        <%= link_to('downvote', downvote_question_path(item)) %>
+      </div>
     </div
   <% end %>
 </div>
