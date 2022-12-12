@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
+      get "toggle_follow"
       post "follow"
       post "unfollow"
     end
@@ -42,7 +43,8 @@ Rails.application.routes.draw do
 
   resources :questions do
     member do
-      post "answer"
+      get "toggle_follow"
+      get "vote"
       post "upvote"
       post "downvote"
       post "follow"
@@ -52,5 +54,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :search, only: [:index]
+  resources :search, only: [:index] do
+    collection do
+      get :all
+    end
+  end
 end

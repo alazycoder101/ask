@@ -7,11 +7,11 @@
       <% else %>
         <% @items.each do |item| %>
           <% if item.searchable_type == 'Question' %>
-            <%= render "questions/question", :item => item %>
+            <%= render "questions/question", :item => Question.find(item.searchable_idr) %>
           <% elsif item.searchable_type == 'User' %>
-            <%= render "users/user", :item => item %>
+            <%= render "users/user", :item => User.find(item.searchable_id) %>
           <% else %>
-            <%= render "answers/answer", :item => item %>
+            <%= render "answers/answer", :item => Answer.find(item.searchable_id) %>
           <% end %>
         <% end %>
       <% end %>
@@ -20,6 +20,5 @@
     </div>
   </div>
   <div>
-    <%= paginate @items %>
   </div>
 </div>
