@@ -5,6 +5,7 @@ class QuestionPolicy < ApplicationPolicy
     true
   end
 
+  # only owner can change
   def update?
     user && record.user_id == user.id
   end
@@ -13,6 +14,7 @@ class QuestionPolicy < ApplicationPolicy
     !user.nil?
   end
 
+  # same as update
   def destroy?
     update?
   end

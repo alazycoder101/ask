@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
-  before_action :set_question, only: [:show, :delete, :edit, :follow, :unfollow, :upvote, :downvote]
+  before_action :set_question, only: [:show, :update, :destroy, :edit, :vote, :toggle_follow, :follow, :unfollow, :upvote, :downvote]
 
   def index
     @questions = Question.order(id: :desc).page params[:page]
@@ -15,12 +15,28 @@ class QuestionsController < ApplicationController
     @question.view!
   end
 
-  def edit
+  def update
+    authorize @question
+
+    @question.update(question_params)
+    redirect_to @question
   end
 
   def destroy
+    authorize @question
+
     @question.destroy
     render plain: "OK"
+  end
+
+  def vote
+    if params[:val].to_i == 1
+      current_user.likes(@question)
+    else
+      current_user.dislikes(@question)
+    end
+
+    render :text => "#{@question.up_votes_count}|#{@question.down_votes_count}"
   end
 
   def upvote
@@ -33,6 +49,16 @@ class QuestionsController < ApplicationController
     current_user.dislikes(@question)
 
     render plain: "voted", status: :created
+  end
+
+  def toggle_follow
+    if params[:val].to_i == 1
+      current_user.follow(@question)
+    else
+      current_user.unfollow(@question)
+    end
+
+    render plain: "OK"
   end
 
   def follow
