@@ -8,7 +8,9 @@
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.answers.count  %> answers</span>
     <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"><%= item.comments.count  %> comments</span>
   </div>
-  <div id="options" data-controller="toggle-action" data-toggle-action-url-value="<%= toggle_follow_user_path(item) %>" data-toggle-action-lables-value='[follow, unfollow]' data-toggle-action-toggle-value=<%= current_user.follow?(item) ? 1 : 0 %>>
-    <button data-toggle-action-target='action' data-action="toggle-action#toggleAction">follow</button>
-  </div>
+  <% if current_user %>
+    <div id="options" data-controller="toggle-action" data-toggle-action-url-value="<%= toggle_follow_user_path(item) %>" data-toggle-action-lables-value='[follow, unfollow]' data-toggle-action-toggle-value=<%= current_user.follow?(item) ? 1 : 0 %>>
+      <button data-toggle-action-target='action' data-action="toggle-action#toggleAction">follow</button>
+    </div>
+  <% end %>
 </div>

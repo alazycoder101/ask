@@ -27,7 +27,9 @@
         <em><a href="<%= topic_path(topic) %>"><%= topic.name %></a></em>
       <% end %>
     </div>
-    <%= link_to "Delete", question_path(item), data: { 'turbo-method': "delete", 'delete-target': "link", action: "turbo:click->delete#captureClick turbo:before-fetch-request@window->delete#deleteAndHide" } %>
+    <% if current_user && current_user.id == item.user_id %>
+      <%= link_to "Delete", question_path(item), data: { 'turbo-method': "delete", 'delete-target': "link", action: "turbo:click->delete#captureClick turbo:before-fetch-request@window->delete#deleteAndHide" } %>
+    <% end %>
   </div>
   </div>
   </div>
