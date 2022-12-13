@@ -29,6 +29,7 @@
 8. Notification and Emails
 9. Specify user to answer questions
 
+
 ## Tech Options
 ### Database
 * PostgreSQL: very popular RDBMS
@@ -37,6 +38,7 @@
 ### Front End
 * React
 * StimulusJS (chosen)
+* Turbolink
 
 ### Backend
 * Rails
@@ -115,6 +117,13 @@ DISABLE_HEADLESS=1 bin/rspec spec/features/user/signin_spec.rb
 ## styling
 With more understanding about tailwind, the styling should be improved.
 
+### After Thoughts
+1. It's really difficult debug tailwind before fully master it.
+2. Should have focused on core function first before expanding to other
+   functions.
+3. Not enough tests to cover all the code.
+4. turbolink + stimulus is confusing sometimes.
+
 ## performance
 ### Cache
 1. cache columns for votable
@@ -158,6 +167,7 @@ class AddCachedVotesToQuestions < ActiveRecord::Migration
   end
 end
 ```
+
 #### Redis
 Cache search result into Redis to speed up the query and free the
 pressure to database.

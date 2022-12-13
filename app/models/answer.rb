@@ -18,6 +18,7 @@ class Answer < ApplicationRecord
   after_destroy :update_question_aggregates
 
   def update_question_aggregates
+    # TODO: put into background jobs
     question.update_aggregates
   end
 end
