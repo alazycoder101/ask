@@ -7,10 +7,10 @@
   margin-bottom: 15px;
 }
 
-.msg.success {background-color: #04AA6D;}
-.msg.info {background-color: #2196F3;}
-.msg.warning {background-color: #ff9800;}
-.msg.alert {background-color: #ff9800;}
+.msg-success {background-color: #04AA6D;}
+.msg-info {background-color: #2196F3;}
+.msg-warning {background-color: #ff9800;}
+.msg-alert {background-color: #ff9800;}
 
 .closebtn {
   margin-left: 15px;
