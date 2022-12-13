@@ -1,7 +1,16 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :toggle_follow, :follow, :unfollow]
+  before_action :set_user, only: [:show, :edit, :update, :toggle_follow, :follow, :unfollow]
+
+  def edit; end
 
   def show; end
+
+  def update
+    authorize @user
+
+    @user.update(user_params)
+    redirect_to @user
+  end
 
   def index
     @users = User.order(:login).page params[:page]
@@ -29,5 +38,9 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :login, :name)
   end
 end

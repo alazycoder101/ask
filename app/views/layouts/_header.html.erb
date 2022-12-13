@@ -2,13 +2,10 @@
   <a href="/"><h1 class="site_title" id="site_title">Ask</h1></a>
   <ul class="header-item tabs" id="tabs">
     <% if current_user %>
-      <li class="menu_item current" id="dashboard"><a href="/home">Dashboard</a></li>
-      <li class="menu_item" id="topics"><a href="/topics">Topics</a></li>
-      <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
-    <% else %>
-      <li class="menu_item" id="topics"><a href="/topics">Topics</a></li>
-      <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
+      <li class="menu_item current" id="dashboard"><a href="/">Dashboard</a></li>
     <% end %>
+    <li class="menu_item" id="topics"><a href="/topics">Topics</a></li>
+    <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
   </ul>
   <ul class="header-item tabs" id="utility_nav">
     <form action="/search">
