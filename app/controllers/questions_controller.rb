@@ -105,6 +105,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, :topics)
+    params.require(:question).permit(:title, :body, :topic_ids)
   end
 end
