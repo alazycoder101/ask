@@ -4,7 +4,7 @@ feature 'Create question' do
   let (:user) { create(:user) }
 
   scenario 'Authenticated user creates a question' do
-    login_as(user)
+    login_as(user, :scope => :user, :run_callbacks => false)
 
     visit questions_path
     click_on 'Ask a question'
