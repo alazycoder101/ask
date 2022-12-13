@@ -104,6 +104,12 @@ bin/dev
 Please go here to check more details
 Rails project with tailwind: https://github.com/alazycoder101/rails-tailwind
 
+### Tips
+
+```bash
+
+DISABLE_HEADLESS=1 bin/rspec spec/features/user/signin_spec.rb
+```
 
 # Further development
 ## styling
