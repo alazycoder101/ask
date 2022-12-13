@@ -15,7 +15,7 @@
         <%= link_to "dislike", "#", data: { vote: { id: { params: -1 } }, action: "vote#updateVote" } %>
       <% end %>
     </div>
-    <% if current_user.id == item.user_id %>
+    <% if current_user && current_user.id == item.user_id %>
       <%= link_to "Delete", answer_path(item), data: { 'turbo-method': "delete", 'delete-target': "link", action: "turbo:click->delete#captureClick turbo:before-fetch-request@window->delete#deleteAndHide" } %>
       </p>
     <% end %>

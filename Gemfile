@@ -68,6 +68,7 @@ group :development, :test do
 
 
   gem 'awesome_print'
+  gem 'faker'
 
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false

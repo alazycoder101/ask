@@ -36,7 +36,7 @@
 
 ### Front End
 * React
-* StimulusJS
+* StimulusJS (chosen)
 
 ### Backend
 * Rails
@@ -158,7 +158,6 @@ class AddCachedVotesToQuestions < ActiveRecord::Migration
   end
 end
 ```
-
 #### Redis
 Cache search result into Redis to speed up the query and free the
 pressure to database.
