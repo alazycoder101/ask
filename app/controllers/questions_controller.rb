@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :update, :destroy, :edit, :vote, :toggle_follow, :follow, :unfollow, :upvote, :downvote]
 
   def index
-    @questions = Question.order(id: :desc).page params[:page]
+    @questions = Question.order(views_count: :desc, answers_count: :desc).page params[:page]
   end
 
   def new

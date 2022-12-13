@@ -12,6 +12,7 @@ class Question < ApplicationRecord
   multisearchable against: [:title, :body]
 
   scope :followed_by, lambda {|user| liked_by(user, vote_scope: User::FOLLOW) }
+  scope :favored, lambda { order(views_count: :desc) }
 
   belongs_to :user
 
