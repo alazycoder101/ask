@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "models/concerns/reviewable_spec"
+require "models/concerns/commentable_spec"
 
 RSpec.describe Answer, type: :model do
   it { is_expected.to belong_to(:user) }
@@ -25,7 +25,6 @@ RSpec.describe Answer, type: :model do
     let(:user) { create(:user) }
     let(:answer) { create(:answer) }
     let(:question) { answer.question }
-    let(:user) { answer.question }
 
     before do
       expect(question.answers_count).to eq (1)

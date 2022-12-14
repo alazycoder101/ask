@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "models/concerns/reviewable_spec"
+require "models/concerns/commentable_spec"
 
 RSpec.describe Question, type: :model do
   it { is_expected.to belong_to(:user) }
