@@ -7,7 +7,9 @@ class TopicsController < ApplicationController
   end
 
   def show
+    authorize @topic
   end
+
 
   def follow
     current_user.follow(@topic)

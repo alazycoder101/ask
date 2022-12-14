@@ -59,6 +59,12 @@
 * Rspec
 * Rubocop
 * Capybara
+* Cypress fast
+
+* Circle CI
+* Travis
+* Git Action
+* Jenkins
 
 ### Docker
 
