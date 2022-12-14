@@ -8,9 +8,9 @@ feature 'Create question' do
 
     visit questions_path
     click_on 'Ask a question'
-    fill_in 'Title', with: 'Test question'
-    fill_in 'Body', with: 'My awesome question body'
-    click_on 'Submit'
+    fill_in 'question[title]', with: 'Test question'
+    fill_in 'question[body]', with: 'My awesome question body'
+    click_button 'Ask'
 
     expect(page).to have_content 'Question is created.'
   end
@@ -22,9 +22,9 @@ feature 'Create question' do
 
     visit questions_path
     click_on 'Ask a question'
-    fill_in 'Title', with: 'Test question'
-    fill_in 'Body', with: 'My awesome question body'
-    click_on 'Submit'
+    fill_in 'question[title]', with: 'Test question'
+    fill_in 'question[body]', with: 'My awesome question body'
+    click_button 'Ask'
 
     expect(page.current_path).to eq "/questions/#{question.id}"
   end

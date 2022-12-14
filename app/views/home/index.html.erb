@@ -1,15 +1,15 @@
 <div class="grid grid-cols-3 gap-5">
   <div id="users">
-  <% @users.each do |item| %>
-    <%= render "users/user", :item => item %>
+  <% @users.each do |user| %>
+    <%= render "users/user", :item => user %>
   <% end %>
   </div>
   <div id="questions">
     <% if @questions.count == 0 %>
       <span>No results</span>
     <% else %>
-      <% @questions.each do |item| %>
-        <%= render "questions/question", :item => item %>
+      <% @questions.each do |question| %>
+        <%= render "questions/question", :item => question %>
       <% end %>
     <% end %>
   </div>
