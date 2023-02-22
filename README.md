@@ -73,5 +73,12 @@ Please go here to check more details
 Rails project with tailwind: https://github.com/alazycoder101/rails-tailwind
 
 
+## Test
+
+```
+yarn add cypress --dev
+yarn cypress open
+
+```
 
 
