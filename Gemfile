@@ -66,6 +66,8 @@ group :development, :test do
   gem 'rubocop-rails', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rspec', require: false
+
+  gem 'cypress-on-rails', '~> 1.0'
 end
 
 group :test do
