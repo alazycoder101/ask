@@ -9,7 +9,8 @@ jobs:
       postgres:
         image: postgres:12
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ""
         ports: ['5432:5432']
 
     steps:
@@ -18,10 +19,7 @@ jobs:
         uses: ruby/setup-ruby@v1.138.0
         with:
           ruby-version: 3.2.0
-
-      - uses: Borales/actions-yarn@v4
-        with:
-          cmd: install
+          bundler-cache: true
 
       - name: Install Dependencies
         run: |
@@ -48,9 +46,8 @@ jobs:
       - name: Build and test with rspec
         env:
           PG_DATABASE: postgres
-          PG_HOST: localhost
+          PG_HOST: postgres
           PG_USER: postgres
-          PG_PASSWORD: password
           RAILS_ENV: test
         run: |
           bundle exec rspec spec
