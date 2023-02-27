@@ -81,4 +81,8 @@ yarn cypress open
 
 ```
 
+```yaml
+gem 'cypress-on-rails', '~> 1.0'
+```
 
+`bin/rails g cypress_on_rails:install`
