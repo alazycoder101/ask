@@ -2,5 +2,11 @@
   "dependencies": {
     "cypress": "^12.7.0",
     "yarn": "^1.22.19"
+  },
+  "scripts": {
+    "cy:server": "CYPRESS=1 bin/rails server -p 5017",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:spec": "cypress run --spec"
   }
 }
