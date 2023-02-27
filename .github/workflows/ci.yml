@@ -63,6 +63,20 @@ jobs:
         run: |
           bundle exec rspec spec
 
+      - name: cypress server
+        env:
+          PG_DATABASE: postgres
+          PG_HOST: localhost
+          PG_USER: postgres
+          PG_PASSWORD: postgres
+          RAILS_ENV: test
+        run: |
+          yarn cy:server
+
+      - name: cypress tests
+        run: |
+          yarn cy:run
+
       - name: Create Coverage Artifact
         uses: actions/upload-artifact@v2
         with:
