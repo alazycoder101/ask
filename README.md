@@ -84,5 +84,17 @@ yarn cypress open
 ```yaml
 gem 'cypress-on-rails', '~> 1.0'
 ```
+```bash
+bin/rails g cypress_on_rails:install
+```
 
-`bin/rails g cypress_on_rails:install`
+## multiple platform
+
+```bash
+# create builder instance for multiple platform
+docker buildx create --use
+# build for two platforms
+docker buildx build --platform=linux/amd64,linux/arm64 . -t ask
+```
+
+https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/
