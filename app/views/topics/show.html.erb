@@ -1,0 +1,8 @@
+<%= render 'topics/topic', item: @topic %>
+
+<h1><%= @topic.questions.count %> Questions </h>
+<div class="px-6 pt-4 pb-2">
+  <% @topic.questions.limit(10).each do |item| %>
+    <%= render "questions/question", :item => item %>
+  <% end %>
+</div>

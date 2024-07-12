@@ -16,4 +16,46 @@ Rails.application.routes.draw do
                registration: 'register',
                sign_up: 'signup'
              }
+  resources :topics do
+    member do
+      post "follow"
+      post "unfollow"
+    end
+  end
+
+  resources :users do
+    member do
+      get "toggle_follow"
+      post "follow"
+      post "unfollow"
+    end
+  end
+
+  resources :answers do
+    member do
+      post "upvote"
+      post "downvote"
+    end
+  end
+
+  resources :comments
+
+  resources :questions do
+    member do
+      get "toggle_follow"
+      get "vote"
+      post "upvote"
+      post "downvote"
+      post "follow"
+      post "unfollow"
+      post "update_topic"
+      get "update_topic"
+    end
+  end
+
+  resources :search, only: [:index] do
+    collection do
+      get :all
+    end
+  end
 end

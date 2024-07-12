@@ -1,0 +1,21 @@
+<%= render 'base' %>
+<div class="question" id="question<%= @question.id %>">
+<%= render "questions/question", :item => @question %>
+<div class="comments" >
+  <% if @question.comments.count == 0 %>
+    <span>No comments</span>
+  <% else %>
+    <% @question.comments.each do |comment| %>
+      <%= render "comments/comment", :item => comment %>
+    <% end %>
+  <% end %>
+</div>
+<div class="answers" >
+  <% if @question.answers.count == 0 %>
+    <span>No answers</span>
+  <% else %>
+    <% @question.answers.each do |answer| %>
+      <%= render "answers/answer", :item => answer %>
+    <% end %>
+  <% end %>
+</div>

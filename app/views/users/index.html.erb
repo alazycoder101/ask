@@ -1,0 +1,10 @@
+<div class="grid grid-cols-2 gap-4">
+  <div id="users">
+    <% @users.each do |item| %>
+      <%= render "users/user", :item => item %>
+    <% end %>
+  </div>
+  <div id="users">
+    <%= paginate @users %>
+  </div>
+</div>

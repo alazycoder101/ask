@@ -1,0 +1,13 @@
+<div class="grid grid-rows-2 gap-4">
+  <div class="grid grid-cols-2 gap-4">
+    <div id="topics">
+      <% @topics.each do |item| %>
+        <%= render "topics/topic", :item => item %>
+      <% end %>
+    </div>
+    <div>
+    </div>
+  <div>
+    <%= paginate @topics %>
+  </div>
+</div>

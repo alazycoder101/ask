@@ -1,0 +1,26 @@
+<div class="header" id="header">
+  <a href="/"><h1 class="site_title" id="site_title">Ask</h1></a>
+  <ul class="header-item tabs" id="tabs">
+    <% if current_user %>
+      <li class="menu_item current" id="dashboard"><a href="/">Dashboard</a></li>
+    <% end %>
+    <li class="menu_item" id="topics"><a href="/topics">Topics</a></li>
+    <li class="menu_item" id="questions"><a href="/questions">Questions</a></li>
+  </ul>
+  <ul class="header-item tabs" id="utility_nav">
+    <form action="/search">
+    <input type="search" calss="p=3 w-fit" placeholder="search question here..." id="site-search" name="q">
+    <button type=submit>Search</button>
+    </form>
+  </ul>
+  <ul class="header-item tabs" id="utility_nav">
+    <% if current_user %>
+      <li class="menu_item" id="ask"><a href="/questions/new">Ask a question</a></li>
+      <li class="menu_item" id="current_user"><a href="/users/<%=current_user.id%>"><%= current_user.email%></a></li>
+      <li class="menu_item" id="logout"><a method="delete" data-turbo-method="delete" data-method="delete" href="/logout">Logout</a></li>
+    <% else %>
+      <li class="menu_item" id="login"><a data-method="delete" href="/login">Sign In</a></li>
+    <% end %>
+  </ul>
+  </div>
+<div>

@@ -1,0 +1,10 @@
+<% if current_user && current_user.id == @user.id %>
+  <%= link_to :my_profile, edit_user_path(current_user) %>
+<% end %>
+<%= render 'users/user', item: @user %>
+<div class="px-6 pt-4 pb-2">
+  <% @user.questions.limit(10).each do |item| %>
+    <%= render "questions/question", :item => item %>
+  <% end %>
+  
+</div>

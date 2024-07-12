@@ -27,6 +27,8 @@ default: &default
 development:
   <<: *default
   database:  <%= ENV['CYPRESS'] ? 'ask_test' : 'ask_development' %>
+  host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %>
+  user: <%= ENV.fetch("DATABASE_USER") { `whoami` } %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -62,6 +64,8 @@ test:
   <<: *default
   database: ask_test
   password: <%= ENV["PG_PASSWORD"] %>
+  host: <%= ENV.fetch("DATABASE_HOST") { 'localhost' } %>
+  user: <%= ENV.fetch("DATABASE_USER") { `whoami` } %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

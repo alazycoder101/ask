@@ -52,8 +52,15 @@ gem 'activeadmin', '~> 2.13'
 # Use Sass to process CSS
 gem "sassc-rails"
 
+gem "pg_search"
+gem 'friendly_id', '~> 5.4.0'
+gem 'acts_as_commentable', git: 'https://github.com/alazycoder101/acts_as_commentable.git'
+gem 'acts_as_votable'
+# Authorization
+gem "pundit", "~> 2.2"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -61,6 +68,7 @@ group :development, :test do
 
 
   gem 'awesome_print'
+  gem 'faker'
 
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
@@ -92,3 +100,6 @@ group :development do
   # gem "spring"
 end
 
+
+
+gem "kaminari", "~> 1.2"

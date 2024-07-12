@@ -1,0 +1,34 @@
+<div id="profile">
+<h2>Profile</h2>
+
+<%= form_for(item, html: {'data-turbo': false}) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, required: true, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div>
+    <%= f.label :login %><br />
+    <%= f.text_field :login, required: true, autofocus: true %>
+  </div>
+
+  <div>
+    <%= f.label :name %><br />
+    <%= f.text_field :name, required: true, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, required: false, autocomplete: "current-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "Confirm new password" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+</div>
