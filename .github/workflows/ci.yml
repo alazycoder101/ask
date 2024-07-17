@@ -6,63 +6,71 @@ on:
   pull_request:
     branches:
       - main
+      - production
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+        redis-version: [6]
 
-    services: 
+    services:
       postgres:
-        image: postgres:12
+        image: postgres:16-alpine
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-
         ports: ['5432:5432']
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.138.0
-        with:
-          ruby-version: 3.2.0
-          bundler-cache: true
+      - uses: actions/checkout@v4
 
       - name: Install Dependencies
         run: |
-          sudo apt install -yqq libpq-dev
-          gem install bundler
+          sudo apt install -yqq build-essential libpq-dev
 
-      - name: Install Gems
-        run: |
-          bundle install --jobs 4 --retry 3
-
-      - uses: Borales/actions-yarn@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.187.0
         with:
-          cmd: install
+          ruby-version: 3.3.3
+          bundler-cache: true
+
+      - name: Set Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile # optional, --immutable
+
+      - name: Redis Server in GitHub Actions
+        uses: supercharge/redis-github-action@1.8.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
 
       - name: Setup database
         env:
-          PG_DATABASE: postgres
-          PG_HOST: localhost
-          PG_USER: postgres
-          PG_PASSWORD: postgres
-          RAILS_ENV: test
-        run: |
-          bundle exec rails db:prepare
-          bundle exec rails assets:precompile
-
-      - name: Build and test with rspec
-        env:
-          PG_DATABASE: postgres
-          PG_HOST: localhost
-          PG_USER: postgres
-          PG_PASSWORD: postgres
+          DATABASE_HOST: localhost
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: postgres
           RAILS_ENV: test
           DISABLE_SPRING: 1
         run: |
-          bundle exec rspec spec
+          bin/rails database:prepare
 
+      - name: Build and test with rspec
+        env:
+          CI: true
+          DATABASE_HOST: localhost
+          DATABASE_USER: postgres
+          DATABASE_PASSWORD: postgres
+          RAILS_ENV: test
+          WITH_COVERAGE: true
+          NODE_OPTIONS: --openssl-legacy-provider
+          DISABLE_SPRING: 1
+        run: |
+          bundle exec rspec
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4
@@ -89,8 +97,10 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Coverage Artifact
-        uses: actions/upload-artifact@v2
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
         with:
-          name: code-coverage
-          path: coverage/
+          name: artifact
+          path: tmp/capybara/
+          retention-days: 90
