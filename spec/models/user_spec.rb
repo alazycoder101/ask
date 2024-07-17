@@ -89,6 +89,4 @@ RSpec.describe User, type: :model do
       expect(user1.follow?(user2)).to be_falsy
     end
   end
-
->>>>>>> feat/quora
 end

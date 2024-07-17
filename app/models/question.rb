@@ -11,8 +11,10 @@ class Question < ApplicationRecord
 
   multisearchable against: [:title, :body]
 
-  scope :followed_by, lambda {|user| liked_by(user, vote_scope: User::FOLLOW) }
-  scope :favored, lambda { order(views_count: :desc) }
+  scope :followed_by, ->(user) { liked_by(user, vote_scope: User::FOLLOW) }
+  scope :favored, -> { order(views_count: :desc) }
+  scope :empty, -> { where(title: ['', nil]) }
+  scope :ordered, -> { order(:created_at) }
 
   belongs_to :user
 

@@ -1,11 +1,11 @@
 version: '3'
 services:
   db:
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     volumes:
       - db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=store_dev
+      - POSTGRES_DB=ask_dev
       - POSTGRES_HOST_AUTH_METHOD=trust
   web:
     build:
