@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.3"
+ruby "3.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.0"
@@ -76,6 +76,7 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
 
   gem 'cypress-on-rails', '~> 1.0'
+  gem 'rbtrace'
 end
 
 group :test do
@@ -85,7 +86,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-selenium'
   gem 'webdrivers'
-  
+
   gem 'database_cleaner-active_record'
 end
 
