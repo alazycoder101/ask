@@ -19,9 +19,9 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  username: <%= ENV['PG_USER'] || `whoami` %>
-  host: <%= ENV['PG_HOST'] || 'localhost' %>
-  port: <%= ENV['PG_PORT'] || '5432' %>
+  username: <%= ENV['PG_USER'] || ENV['DATABASE_USER'] || `whoami` %>
+  host: <%= ENV['PG_HOST'] || ENV['DATABASE_HOST'] || 'localhost' %>
+  port: <%= ENV['PG_PORT'] || ENV['DATABASE_PORT'] || '5432' %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:

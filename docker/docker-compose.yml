@@ -6,6 +6,7 @@ services:
       - db:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=ask_dev
+      - POSTGRES_USER=root
       - POSTGRES_HOST_AUTH_METHOD=trust
   web:
     build:
@@ -14,7 +15,7 @@ services:
     volumes:
       - ..:/opt/ask
     ports:
-      - "8081:8081"
+      - "8082:8081"
     environment:
       - "RAILS_ENV=development"
       - "DATABASE_HOST=db"
